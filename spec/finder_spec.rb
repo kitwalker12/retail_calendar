@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Finder do
-  let(:cal) { Finder.new }
+describe RetailCalendar::Finder do
+  let(:cal) { RetailCalendar::Finder.new }
 
   describe "Core functions" do
     it "should return correct week start and end dates" do
