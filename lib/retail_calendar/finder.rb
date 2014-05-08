@@ -18,7 +18,7 @@ module RetailCalendar
       period = period.to_i
       raise ArgumentError, 'invalid period' if (period > 12 or period < 1)
       week = week.to_i
-      raise ArgumentError, 'invalid week' if (week > 7 or week < 1)
+      raise ArgumentError, 'invalid week' if (week > 5 or week < 1)
       start_date = period(year, period).start_date
       for i in 1..(week - 1)
         start_date = start_date + 7
