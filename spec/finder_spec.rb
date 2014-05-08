@@ -11,25 +11,25 @@ describe RetailCalendar::Finder do
     end
 
     it "should return correct period start and end dates" do
-      res = cal.period(2014, 1, 1)
+      res = cal.period(2014, 1)
       expect(res.start).to eq(DateTime.new(2014,2,2))
       expect(res.end).to eq(DateTime.new(2014,3,1))
     end
 
     it "should return correct quarter start and end dates" do
-      res = cal.quarter(2014, 1, 1)
+      res = cal.quarter(2014, 1)
       expect(res.start).to eq(DateTime.new(2014,2,2))
       expect(res.end).to eq(DateTime.new(2014,5,3))
     end
 
     it "should return correct season start and end dates" do
-      res = cal.season(2014, 1, 1)
+      res = cal.season(2014, 1)
       expect(res.start).to eq(DateTime.new(2014,2,2))
       expect(res.end).to eq(DateTime.new(2014,8,2))
     end
 
     it "should return correct year start and end dates" do
-      res = cal.year(2014, 1, 1)
+      res = cal.year(2014)
       expect(res.start).to eq(DateTime.new(2014,2,2))
       expect(res.end).to eq(DateTime.new(2015,2,31))
     end
