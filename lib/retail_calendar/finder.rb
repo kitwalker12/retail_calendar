@@ -79,21 +79,6 @@ module RetailCalendar
       })
     end
 
-    def retail_year(month, year)
-      month = month.to_i
-      year = year.to_i
-      month == 1 ? year - 1 : year
-    end
-
-    def start_period
-      2
-    end
-
-    def month_offset_from_year_start(month)
-      month = month.to_i
-      month == 1 ? 11 : month - 2
-    end
-
     def weeks_in_month(month)
       month = month.to_i
       month % 3 == 0 ? 5 : 4
