@@ -1,5 +1,7 @@
 # RetailCalendar
 
+[![Build Status](https://travis-ci.org/kitwalker12/retail_calendar.svg?branch=master)](https://travis-ci.org/kitwalker12/retail_calendar)
+
 Gem for finding ranges in Retail or the 4-5-4 Calendar format
 
 ## Installation
