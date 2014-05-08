@@ -1,4 +1,5 @@
 require "active_support/all"
+require "dish"
 
 module RetailCalendar
   class Finder
