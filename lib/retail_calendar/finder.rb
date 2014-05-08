@@ -70,7 +70,93 @@ module RetailCalendar
       create_return_object(start_date,end_date)
     end
 
+    def last_year
+      previous_year = DateTime.now.change(:offset => @offset).year - 1
+      year(previous_year)
+    end
+
+    def last_season
+      current_year = DateTime.now.change(:offset => @offset).year
+      current_season = get_current_season
+      if current_season == 1
+        previous_year = current_year - 1
+        previous_season = 2
+      else
+        previous_year = current_year
+        previous_season = current_season - 1
+      end
+      season(previous_year, previous_season)
+    end
+
+    def last_quarter
+      current_year = DateTime.now.change(:offset => @offset).year
+      current_quarter = get_current_quarter
+      if current_quarter == 1
+        previous_year = current_year - 1
+        previous_quarter = 4
+      else
+        previous_year = current_year
+        previous_quarter = current_quarter - 1
+      end
+      quarter(previous_year, previous_quarter)
+    end
+
+    def last_period
+      current_year = DateTime.now.change(:offset => @offset).year
+      current_period = get_current_period
+      if current_period == 1
+        previous_year = current_year - 1
+        previous_period = 12
+      else
+        previous_year = current_year
+        previous_period = current_period - 1
+      end
+      period(previous_year, previous_period)
+    end
+
+    def last_week
+      start_date = DateTime.now.change(:offset => @offset) - 1.week
+      start_date = start_date.beginning_of_week(start_day = :sunday)
+      end_date = start_date + 1.week - 1
+      create_return_object(start_date,end_date)
+    end
+
     private
+
+    def get_current_season
+      curr_date = DateTime.now.change(:offset => @offset)
+      start_date = start_time_for_year(curr_date.year)
+      days_passed = (curr_date.to_date - start_date.to_date).to_i
+      days_passed < SEASON_LENGTH ? 1 : 2
+    end
+
+    def get_current_quarter
+      curr_date = DateTime.now.change(:offset => @offset)
+      start_date = start_time_for_year(curr_date.year)
+      days_passed = (curr_date.to_date - start_date.to_date).to_i
+      case days_passed
+      when 0..91
+        1
+      when 92..182
+        2
+      when 183..273
+        3
+      else
+        4
+      end
+    end
+
+    def get_current_period
+      curr_date = DateTime.now.change(:offset => @offset)
+      start_date = start_time_for_year(curr_date.year)
+      period = 1
+      while start_date < curr_date
+        no_weeks = weeks_in_month(period + 1)
+        start_date += no_weeks.weeks
+        period += 1
+      end
+      period - 1
+    end
 
     def create_return_object(start_date, end_date)
       Dish({
