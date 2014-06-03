@@ -75,6 +75,11 @@ module RetailCalendar
       year(previous_year)
     end
 
+    def this_year
+      previous_year = DateTime.now.change(:offset => @offset).year
+      year(previous_year)
+    end
+
     def last_season
       current_year = DateTime.now.change(:offset => @offset).year
       current_season = get_current_season
@@ -86,6 +91,12 @@ module RetailCalendar
         previous_season = current_season - 1
       end
       season(previous_year, previous_season)
+    end
+
+    def this_season
+      current_year = DateTime.now.change(:offset => @offset).year
+      current_season = get_current_season
+      season(current_year, current_season)
     end
 
     def last_quarter
@@ -101,6 +112,12 @@ module RetailCalendar
       quarter(previous_year, previous_quarter)
     end
 
+    def this_quarter
+      current_year = DateTime.now.change(:offset => @offset).year
+      current_quarter = get_current_quarter
+      quarter(current_year, current_quarter)
+    end
+
     def last_period
       current_year = DateTime.now.change(:offset => @offset).year
       current_period = get_current_period
@@ -114,8 +131,21 @@ module RetailCalendar
       period(previous_year, previous_period)
     end
 
+    def this_period
+      current_year = DateTime.now.change(:offset => @offset).year
+      current_period = get_current_period
+      period(current_year, current_period)
+    end
+
     def last_week
       start_date = DateTime.now.change(:offset => @offset) - 1.week
+      start_date = start_date.beginning_of_week(start_day = :sunday)
+      end_date = start_date + 1.week - 1
+      create_return_object(start_date,end_date)
+    end
+
+    def this_week
+      start_date = DateTime.now.change(:offset => @offset)
       start_date = start_date.beginning_of_week(start_day = :sunday)
       end_date = start_date + 1.week - 1
       create_return_object(start_date,end_date)

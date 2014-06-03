@@ -33,7 +33,7 @@ Or install it yourself as:
 
 Instantiate RetailCalendar::Finder object to get start and end dates for weeks/periods(months)/quarters/seasons/years
 
-```
+```ruby
 > cal = RetailCalendar::Finder.new
 => #<RetailCalendar::Finder:0x00000102125a40 @offset="+0000">
 ```
@@ -47,7 +47,7 @@ Instantiate with time zone
 
 ### Functions
 
-```
+```ruby
 > res = cal.week(2014, 1, 1)
 => #<Dish::Plate:0x0000010214e6c0
  @_original_hash=
@@ -83,11 +83,71 @@ Instantiate with time zone
  @_original_hash=
   {"start_date"=>Sun, 02 Feb 2014 00:00:00 +0000,
    "end_date"=>Sat, 31 Jan 2015 00:00:00 +0000}>
+
+> res = cal.this_week
+=> #<Dish::Plate:0x000001024bc230
+ @_original_hash=
+  {"start_date"=>Sun, 01 Jun 2014 00:00:00 +0000,
+   "end_date"=>Sat, 07 Jun 2014 00:00:00 +0000}>
+
+> res = cal.this_period
+=> #<Dish::Plate:0x000001011b0678
+ @_original_hash=
+  {"start_date"=>Sun, 01 Jun 2014 00:00:00 +0000,
+   "end_date"=>Sat, 05 Jul 2014 00:00:00 +0000}>
+
+> res = cal.this_quarter
+=> #<Dish::Plate:0x000001012a3b20
+ @_original_hash=
+  {"start_date"=>Sun, 04 May 2014 00:00:00 +0000,
+   "end_date"=>Sat, 02 Aug 2014 00:00:00 +0000}>
+
+> res = cal.this_season
+=> #<Dish::Plate:0x00000101313790
+ @_original_hash=
+  {"start_date"=>Sun, 02 Feb 2014 00:00:00 +0000,
+   "end_date"=>Sat, 02 Aug 2014 00:00:00 +0000}>
+
+> res = cal.this_year
+=> #<Dish::Plate:0x00000101378c30
+ @_original_hash=
+  {"start_date"=>Sun, 02 Feb 2014 00:00:00 +0000,
+   "end_date"=>Sat, 31 Jan 2015 00:00:00 +0000}>
+
+> res = cal.last_week
+=> #<Dish::Plate:0x000001013ebdc0
+ @_original_hash=
+  {"start_date"=>Sun, 25 May 2014 00:00:00 +0000,
+   "end_date"=>Sat, 31 May 2014 00:00:00 +0000}>
+
+> res = cal.last_period
+=> #<Dish::Plate:0x0000010142a020
+ @_original_hash=
+  {"start_date"=>Sun, 04 May 2014 00:00:00 +0000,
+   "end_date"=>Sat, 31 May 2014 00:00:00 +0000}>
+
+> res = cal.last_quarter
+=> #<Dish::Plate:0x00000101483440
+ @_original_hash=
+  {"start_date"=>Sun, 02 Feb 2014 00:00:00 +0000,
+   "end_date"=>Sat, 03 May 2014 00:00:00 +0000}>
+
+> res = cal.last_season
+=> #<Dish::Plate:0x000001014db3c0
+ @_original_hash=
+  {"start_date"=>Sun, 04 Aug 2013 00:00:00 +0000,
+   "end_date"=>Sat, 01 Feb 2014 00:00:00 +0000}>
+
+> res = cal.last_year
+=> #<Dish::Plate:0x00000101529a20
+ @_original_hash=
+  {"start_date"=>Sun, 03 Feb 2013 00:00:00 +0000,
+   "end_date"=>Sat, 01 Feb 2014 00:00:00 +0000}>
 ```
 
 Handles Retail Leap years
 
-```
+```ruby
 > res = cal.year(2006)
 => #<Dish::Plate:0x00000101979558
  @_original_hash=
