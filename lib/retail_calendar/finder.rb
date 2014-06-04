@@ -82,7 +82,7 @@ module RetailCalendar
 
     def last_season
       current_year = DateTime.now.change(:offset => @offset).year
-      current_season = get_current_season
+      current_season = get_season
       if current_season == 1
         previous_year = current_year - 1
         previous_season = 2
@@ -95,13 +95,13 @@ module RetailCalendar
 
     def this_season
       current_year = DateTime.now.change(:offset => @offset).year
-      current_season = get_current_season
+      current_season = get_season
       season(current_year, current_season)
     end
 
     def last_quarter
       current_year = DateTime.now.change(:offset => @offset).year
-      current_quarter = get_current_quarter
+      current_quarter = get_quarter
       if current_quarter == 1
         previous_year = current_year - 1
         previous_quarter = 4
@@ -114,13 +114,13 @@ module RetailCalendar
 
     def this_quarter
       current_year = DateTime.now.change(:offset => @offset).year
-      current_quarter = get_current_quarter
+      current_quarter = get_quarter
       quarter(current_year, current_quarter)
     end
 
     def last_period
       current_year = DateTime.now.change(:offset => @offset).year
-      current_period = get_current_period
+      current_period = get_period
       if current_period == 1
         previous_year = current_year - 1
         previous_period = 12
@@ -133,7 +133,7 @@ module RetailCalendar
 
     def this_period
       current_year = DateTime.now.change(:offset => @offset).year
-      current_period = get_current_period
+      current_period = get_period
       period(current_year, current_period)
     end
 
@@ -151,17 +151,23 @@ module RetailCalendar
       create_return_object(start_date,end_date)
     end
 
+    def get_from_date(date)
+      Dish({
+        period: get_period(date),
+        quarter: get_quarter(date),
+        season: get_season(date)
+      })
+    end
+
     private
 
-    def get_current_season
-      curr_date = DateTime.now.change(:offset => @offset)
+    def get_season(curr_date = DateTime.now.change(:offset => @offset))
       start_date = start_time_for_year(curr_date.year)
       days_passed = (curr_date.to_date - start_date.to_date).to_i
       days_passed < SEASON_LENGTH ? 1 : 2
     end
 
-    def get_current_quarter
-      curr_date = DateTime.now.change(:offset => @offset)
+    def get_quarter(curr_date = DateTime.now.change(:offset => @offset))
       start_date = start_time_for_year(curr_date.year)
       days_passed = (curr_date.to_date - start_date.to_date).to_i
       case days_passed
@@ -176,8 +182,7 @@ module RetailCalendar
       end
     end
 
-    def get_current_period
-      curr_date = DateTime.now.change(:offset => @offset)
+    def get_period(curr_date = DateTime.now.change(:offset => @offset))
       start_date = start_time_for_year(curr_date.year)
       period = 1
       while start_date < curr_date

@@ -40,7 +40,7 @@ Instantiate RetailCalendar::Finder object to get start and end dates for weeks/p
 
 Instantiate with time zone
 
-```
+```ruby
 > cal = RetailCalendar::Finder.new('+7000')
 => #<RetailCalendar::Finder:0x000001021a3328 @offset="+7000">
 ```
@@ -143,6 +143,10 @@ Instantiate with time zone
  @_original_hash=
   {"start_date"=>Sun, 03 Feb 2013 00:00:00 +0000,
    "end_date"=>Sat, 01 Feb 2014 00:00:00 +0000}>
+
+> res = cal.get_from_date(Time.now)
+=> #<Dish::Plate:0x000001013b2a70
+ @_original_hash={"period"=>5, "quarter"=>2, "season"=>1}>
 ```
 
 Handles Retail Leap years
