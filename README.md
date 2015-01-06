@@ -41,8 +41,8 @@ Instantiate RetailCalendar::Finder object to get start and end dates for weeks/p
 Instantiate with time zone
 
 ```ruby
-> cal = RetailCalendar::Finder.new('+7000')
-=> #<RetailCalendar::Finder:0x000001021a3328 @offset="+7000">
+> cal = RetailCalendar::Finder.new('PST')
+=> #<RetailCalendar::Finder:0x000001021a3328 @offset="PST">
 ```
 
 ### Functions
